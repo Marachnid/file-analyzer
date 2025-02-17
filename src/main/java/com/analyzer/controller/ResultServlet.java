@@ -26,104 +26,124 @@ import com.analyzer.model.Driver;
  * Receives incoming file and sends it to the analyzer main method for analysis.
  * UI added to eliminate the need for running scripts in the terminal.
  * Returns a list of output files with data/analysis on the input file.
+ * 
+ * Web-based file management (upload/download) and spring-boot/thyme are newer topics to me,
+ * collectGeneratedFiles(), removeUploadDirectory(), downloadFile() are a mix of tutorials, research, and AI
+ * to learn, troubleshoot, and configure them to work with my application
  */
 @Controller
 public class ResultServlet {
 
-    private static final String OUTPUT_DIR = "src/main/output";
+    //used for collecting the generated files from analysis output directory
+    String OUTPUT_DIRECTORY = "src/main/output";
 
     /**
-     * Process incoming file.
+     * analysis servlet that receives an incoming file to analyze
+     * analyzes strings/tokens of input file and produces output files detailing insights
+     * returns the output files as a list of downloadable items to be displayed in results.html
      * @param file file received from form
      * @param model Spring interface to pass data
-     * @return results if successful, otherwise return to index
+     * @return results if successful, otherwise return index
      */
     @PostMapping("/results")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
-        if (file.isEmpty()) {
-            model.addAttribute("message", "Please select a file to upload");
-            return "index";
-        }
+    public String analyzeUploadedFile(@RequestParam("file") MultipartFile file, Model model) {
 
+        //quick check for file upload, redirects back to itself if file is empty
+        if (file.isEmpty()) {return "index";}
+
+
+        //initialize temporary directory for try/catch block
         Path uploadDirectory = null;
 
+        //try catch block to create a temp directory and process input file
         try {
-            // Get filepath of uploaded file
-            uploadDirectory = Files.createTempDirectory("tempFiles");
+            uploadDirectory = Files.createTempDirectory("analysisFile");
             Path uploadFile = uploadDirectory.resolve(file.getOriginalFilename());
             file.transferTo(uploadFile);
 
-            // Pass uploaded filepath to the main method of the file analyzer and initiate analysis
+            //pass the file to the main method of the Analysis Driver and analyze file
             String filePath = uploadFile.toString();
             Driver.main(new String[]{filePath});
 
+            //searches project output directory and adds output filepaths to list
             List<String> generatedFiles = collectGeneratedFiles();
 
+            //make list available to results page
             model.addAttribute("generatedFiles", generatedFiles);
 
-            // Add a success message to the model
-            model.addAttribute("message", "File analyzed successfully. Check the output files below.");
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            model.addAttribute("message", "An error occurred while processing the file");
+        } catch (IOException exception) {
+            exception.printStackTrace();
             return "index";
+            
         } finally {
-            // Clean up the temporary directory
+            //delete the temporary directory when finished
             if (uploadDirectory != null) {
-                cleanUpTempDirectory(uploadDirectory);
+                removeUploadDirectory(uploadDirectory);
             }
         }
-
-        // Forward to the results page
+        //forward to results if successfull
         return "results";
     }
 
 
-    //grabs the filenames of the generated output files
+    /**
+     * scans project directory for output files and returns a list of filenames 
+     * @return list of filePath strings
+     * @throws IOException handled in parent try/catch
+     */
     private List<String> collectGeneratedFiles() throws IOException {
         List<String> filePaths = new ArrayList<>();
-        Path outputDir = Paths.get(OUTPUT_DIR);
+        Path outputDir = Paths.get(OUTPUT_DIRECTORY);
 
+        //check outputdirectory for files, if true: convert to string and add to list
         if (Files.exists(outputDir)) {
-            Files.list(outputDir).forEach(file -> {
-                filePaths.add(file.getFileName().toString());
+            Files.list(outputDir).forEach(item -> {
+                filePaths.add(item.getFileName().toString());
             });
         }
-
         return filePaths;
     }
 
 
-    //cleans up temporary upload file and directory
-    private void cleanUpTempDirectory(Path tempDir) {
+    /**
+     * removes temporary directory and files after completing analysis
+     * not as knowledgeable on this
+     * @param uploadDirectory temporary directory for upload file
+     */
+    private void removeUploadDirectory(Path uploadDirectory) {
         try {
-            Files.walk(tempDir)
-                .sorted(Comparator.reverseOrder())
-                .map(Path::toFile)
-                .forEach(file -> {
-                    if (!file.delete()) {
+            Files.walk(uploadDirectory)             //generate stream of path objects
+                .sorted(Comparator.reverseOrder())  //delete child files/path objects before parents
+                .map(Path::toFile)                  //maps path objects to file objects to use delete() method
+                .forEach(file -> {                  
+                    if (!file.delete()) {           //designates file for deletion on exit 
                         file.deleteOnExit();
                     }
                 });
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
-    //maps file downloads to output links
+
+    /**
+     * enables download of internal output/server files by browser/client
+     * maps get request with analysis files URL patterns
+     * not as knowledgeable on this
+     */ 
     @GetMapping("/download/{filename:.+}")
     public ResponseEntity<InputStreamResource> downloadFile(@PathVariable String filename) {
         try {
-            Path file = Paths.get(OUTPUT_DIR).resolve(filename);
+            Path file = Paths.get(OUTPUT_DIRECTORY).resolve(filename);
             InputStreamResource resource = new InputStreamResource(Files.newInputStream(file));
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .body(resource);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
