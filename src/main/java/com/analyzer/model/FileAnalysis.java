@@ -1,5 +1,5 @@
-package java112.analyzer;
-import java112.utilities.PropertiesLoader;
+package com.analyzer.model;
+import com.analyzer.utilities.PropertiesLoader;
 import java.io.*;
 import java.util.*;
 

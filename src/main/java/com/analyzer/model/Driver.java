@@ -1,4 +1,4 @@
-package java112.analyzer;
+package com.analyzer.model;
 
 /**
  * main method/driver class for Analyzer program - initiates program with FileAnalysis instance

@@ -1,4 +1,4 @@
-package java112.analyzer;
+package com.analyzer.model;
 import java.util.*;
 import java.io.*;
 

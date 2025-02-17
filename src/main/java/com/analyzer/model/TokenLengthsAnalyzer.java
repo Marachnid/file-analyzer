@@ -1,6 +1,11 @@
-package java112.analyzer;
-import java.io.*;
-import java.util.*;
+package com.analyzer.model;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TreeMap;
 
 
 /**

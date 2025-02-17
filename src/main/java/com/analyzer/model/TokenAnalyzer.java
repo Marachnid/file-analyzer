@@ -1,4 +1,4 @@
-package java112.analyzer;
+package com.analyzer.model;
 
 /**
  * public interface - defines abstract methods called by FileSummaryAnalyzer and DistinctTokensAnalyzer
