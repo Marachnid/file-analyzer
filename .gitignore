@@ -7,6 +7,9 @@
 #ignore list files
 *.lst
 
+#ignore txt files
+*.txt
+
 # Ignore build directory
 /build/
 /target/

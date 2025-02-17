@@ -2,10 +2,9 @@ package com.analyzer.model;
 
 /**
  * main method/driver class for Analyzer program - initiates program with FileAnalysis instance
- * 
  * @author mcherry2
- * @version 3.0
- * @since 2024-11-16
+ * @version 4.0
+ * @since 2025-2-17
  */
 public class Driver {
 
@@ -21,9 +20,8 @@ public class Driver {
         double executionDuration;
 
 
-        FileAnalysis test = new FileAnalysis();
-        test.validateAnalyzer(args);
-
+        FileAnalysis fileAnalysis = new FileAnalysis();
+        fileAnalysis.validateAnalyzer(args);
 
         endTime = System.currentTimeMillis();
         executionDuration = (endTime - startTime) / 1000.0;

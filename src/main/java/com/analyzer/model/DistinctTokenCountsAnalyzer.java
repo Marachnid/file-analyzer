@@ -11,8 +11,8 @@ import java.util.TreeMap;
 /**
  * analyzes file to find distinct tokens and how often they occur
  * @author mcherry2
- * @version 3.0
- * @since 2024-11-16
+ * @version 4.0
+ * @since 2025-2-17
  * @see TokenAnalyzer
  */
 public class DistinctTokenCountsAnalyzer implements TokenAnalyzer {
@@ -86,11 +86,11 @@ public class DistinctTokenCountsAnalyzer implements TokenAnalyzer {
             
         } catch (IOException exception) {
             System.out.println("Error processing summary file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
 
         } catch (Exception exception) {
             System.out.println("Error writing to summary file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
         }
     }
 

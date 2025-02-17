@@ -19,8 +19,8 @@ import java.util.TreeMap;
  * keywords are aquired by opening/reading config/search-tokens.txt (path is found via properties file)
  *      SEARCH tokens are CASE INSENSITIVE - search tokens are added as lowercase and processed tokens are .toLowerCase()
  * @author mcherry2
- * @version 3.0
- * @since 2024-11-16
+ * @version 4.0
+ * @since 2025-2-17
  * @see TokenAnalyzer
  */
 public class TokenLocationSearchAnalyzer implements TokenAnalyzer {
@@ -63,7 +63,7 @@ public class TokenLocationSearchAnalyzer implements TokenAnalyzer {
      * adds tokens found from search file into foundLocations instance map
      * @param properties properties
      */
-    public void openSearchFile(Properties properties) {
+    public final void openSearchFile(Properties properties) {
 
         //locate search tokens via classpath property
         String searchTokenPath = properties.getProperty("classpath.search.tokens");
@@ -78,15 +78,15 @@ public class TokenLocationSearchAnalyzer implements TokenAnalyzer {
 
         } catch (FileNotFoundException fileNotFound) {
             System.out.println("Error finding Search Token file");
-            fileNotFound.printStackTrace();
+            // fileNotFound.printStackTrace();
 
         } catch (IOException exception) {
             System.out.println("Error reading Search Token file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
 
         } catch (Exception exception) {
             System.out.println("Error processing Search Token file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
         }
     }
 
@@ -160,11 +160,11 @@ public class TokenLocationSearchAnalyzer implements TokenAnalyzer {
 
         } catch (IOException exception) {
             System.out.println("Error processing search token output file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
 
         } catch (Exception exception) {
             System.out.println("Error writing to search token output file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
         }
     }
 
@@ -198,7 +198,7 @@ public class TokenLocationSearchAnalyzer implements TokenAnalyzer {
         print.println();
 
         //if search tokens are found/exist, append their values and a new line for space
-        if (entry.getValue().size() != 0) {
+        if (!entry.getValue().isEmpty()) {
             printFoundLocationValues(entry, print);
             print.println();
         }

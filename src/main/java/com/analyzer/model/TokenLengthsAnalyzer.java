@@ -11,8 +11,8 @@ import java.util.TreeMap;
 /**
  * analyzes file to track lengths of tokens and how often they occur
  * @author mcherry2
- * @version 3.0
- * @since 2024-11-16
+ * @version 4.0
+ * @since 2025-2-17
  * @see TokenAnalyzer
  */
 public class TokenLengthsAnalyzer implements TokenAnalyzer{
@@ -82,11 +82,11 @@ public class TokenLengthsAnalyzer implements TokenAnalyzer{
 
         } catch (IOException exception) {
             System.out.println("Error processing distinct token lengths file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
 
         } catch (Exception exception) {
             System.out.println("Error writing to distinct token lengths file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
         }
     }
 

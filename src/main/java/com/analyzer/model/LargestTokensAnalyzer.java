@@ -1,12 +1,17 @@
 package com.analyzer.model;
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Properties;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * analyzes file for tokens of a predetermined length or larger indicated in properties file
  * @author mcherry2
- * @version 3.0
- * @since 2024-11-16
+ * @version 4.0
+ * @since 2025-2-17
  * @see TokenAnalyzer
  */
 public class LargestTokensAnalyzer implements TokenAnalyzer {
@@ -74,11 +79,11 @@ public class LargestTokensAnalyzer implements TokenAnalyzer {
             
         } catch (IOException exception) {
             System.out.println("Error processing LargestTokens file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
 
         } catch (Exception exception) {
             System.out.println("Error writing to LargestTokens file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
         }
     }
 

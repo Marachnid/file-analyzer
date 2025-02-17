@@ -15,8 +15,8 @@ import com.analyzer.utilities.PropertiesLoader;
  * calls methods to create and write to a summary file and a file containing all unique tokens
  * 
  * @author mcherry2
- * @version 3.0
- * @since 2024-11-16
+ * @version 4.0
+ * @since 2025-2-17
  * @see PropertiesLoader
  * @see FileSummaryAnalyzer
  * @see DistinctTokensAnalyzer
@@ -60,8 +60,7 @@ public class FileAnalysis implements PropertiesLoader {
         String propertiesFilePath = "config/analyzer.properties";
 
         //load and assign properties for validation 
-        Properties properties = new Properties();
-        properties = loadProperties(propertiesFilePath);
+        Properties properties = loadProperties(propertiesFilePath);
 
         createInstance(properties);         //add instances to HashSet<TokenAnalyzer> for loop execution
         openInputFile(inputFilePath);       
@@ -101,15 +100,15 @@ public class FileAnalysis implements PropertiesLoader {
 
         } catch (FileNotFoundException fileNotFound) {
             System.out.println("Error finding file");
-            fileNotFound.printStackTrace();
+            // fileNotFound.printStackTrace();
 
         } catch (IOException exception) {
             System.out.println("Error opening file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
 
         } catch (Exception exception) {
             System.out.println("Error processing file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
         }
     }
 

@@ -4,8 +4,8 @@ package com.analyzer.model;
  * public interface - defines abstract methods called by FileSummaryAnalyzer and DistinctTokensAnalyzer
  * 
  * @author mcherry2
- * @version 3.0
- * @since 2024-11-16
+ * @version 4.0
+ * @since 2025-2-17
  * @see FileSummaryAnalyzer
  * @see DistinctTokensAnalyzer
  * @see DistinctTokenCountsAnalyzer

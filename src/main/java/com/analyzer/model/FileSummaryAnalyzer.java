@@ -1,17 +1,21 @@
 package com.analyzer.model;
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
 
 /**
  * responsible for producing a summary output file for the analyzed file
  * formats file display and counts total tokens
  * 
  * @author mcherry2
- * @version 3.0
- * @since 2024-11-16
+ * @version 4.0
+ * @since 2025-2-17
  * @see TokenAnalyzer
  */
 public class FileSummaryAnalyzer implements TokenAnalyzer {
@@ -106,11 +110,11 @@ public class FileSummaryAnalyzer implements TokenAnalyzer {
 
         } catch (IOException exception) {
             System.out.println("Error writing to summary file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
 
         } catch (Exception exception) {
             System.out.println("Error processing summary file");
-            exception.printStackTrace();
+            // exception.printStackTrace();
         }
     }
 }

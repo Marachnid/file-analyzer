@@ -73,7 +73,7 @@ public class ResultServlet {
 
 
         } catch (IOException exception) {
-            exception.printStackTrace();
+            // exception.printStackTrace();
             return "index";
             
         } finally {
@@ -122,7 +122,7 @@ public class ResultServlet {
                     }
                 });
         } catch (IOException exception) {
-            exception.printStackTrace();
+            // exception.printStackTrace();
         }
     }
 
@@ -143,7 +143,7 @@ public class ResultServlet {
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .body(resource);
         } catch (IOException exception) {
-            exception.printStackTrace();
+            // exception.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
