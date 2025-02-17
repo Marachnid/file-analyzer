@@ -1,7 +1,13 @@
 package com.analyzer.model;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
+
 import com.analyzer.utilities.PropertiesLoader;
-import java.io.*;
-import java.util.*;
 
 /**
  * primary processing class of analyzer
@@ -26,12 +32,12 @@ public class FileAnalysis implements PropertiesLoader {
 
 
     /**
-     * validate number of arguments coming in
-     * @param arguments CLA for input file and properties file paths
+     * validate number of arguments coming in, filepath and pre-selected properties file
+     * @param arguments CLA for input file to be analyzed
      */
     public void validateAnalyzer(String[] arguments) {
 
-        final int ALLOWED_ARGUMENTS = 2;
+        final int ALLOWED_ARGUMENTS = 1;
 
         // initiate file processing if argument count is valid
         if (arguments.length != ALLOWED_ARGUMENTS) {
@@ -51,10 +57,11 @@ public class FileAnalysis implements PropertiesLoader {
     public void analyze(String[] arguments) {
 
         String inputFilePath = arguments[0];
+        String propertiesFilePath = "config/analyzer.properties";
 
         //load and assign properties for validation 
         Properties properties = new Properties();
-        properties = loadProperties(arguments[1]);
+        properties = loadProperties(propertiesFilePath);
 
         createInstance(properties);         //add instances to HashSet<TokenAnalyzer> for loop execution
         openInputFile(inputFilePath);       
@@ -71,13 +78,13 @@ public class FileAnalysis implements PropertiesLoader {
      * @param properties properties type retreived from CLA
      */
     public void createInstance(Properties properties) {
-        analyzers = new HashSet<TokenAnalyzer>();
+        analyzers = new HashSet<>();
         analyzers.add(new FileSummaryAnalyzer(properties));
         analyzers.add(new DistinctTokensAnalyzer(properties));
         analyzers.add(new LargestTokensAnalyzer(properties));
         analyzers.add(new DistinctTokenCountsAnalyzer(properties));
         analyzers.add(new TokenLengthsAnalyzer(properties));
-        analyzers.add(new TokenLocationSearchAnalyzer(properties));
+        // analyzers.add(new TokenLocationSearchAnalyzer(properties));
     }
     
 

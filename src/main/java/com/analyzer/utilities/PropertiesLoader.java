@@ -27,7 +27,7 @@ public interface PropertiesLoader {
         try {
 
             //extra validation for incorrect/non-existant files returning as null instead of IO catching the error
-            InputStream inputStream = this.getClass().getResourceAsStream(propertiesFilePath);
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(propertiesFilePath);
 
             if (inputStream == null) {
 
@@ -35,7 +35,7 @@ public interface PropertiesLoader {
 
             } else {
 
-                properties.load(this.getClass().getResourceAsStream(propertiesFilePath));
+                properties.load(inputStream);
             }
 
 
