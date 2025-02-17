@@ -1,0 +1,41 @@
+# Ignore class files
+*.class
+
+#ignore jar files
+*.jar
+
+#ignore list files
+*.lst
+
+# Ignore build directory
+/build/
+/target/
+
+# Ignore logs
+*.log
+
+# Ignore IDE-specific files (e.g., Eclipse, IntelliJ IDEA)
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Maven specific files
+.mvn/
+!.mvn/maven.config
+target/
+
+# Gradle specific files
+.gradle/
+build/
+
+# Other files
+*.swp
+*.swo
+.DS_Store

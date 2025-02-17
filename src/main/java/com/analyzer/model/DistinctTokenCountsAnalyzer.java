@@ -1,6 +1,11 @@
 package com.analyzer.model;
-import java.util.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TreeMap;
 
 
 /**

@@ -4,10 +4,12 @@
     <title>File Analyzer</title>
 </head>
 <body>
-    <h1>Upload a File for Analysis</h1>
-    <form action="/results" method="post">
-        <input type="file" name="file" />
-        <button type="submit">Upload</button>
+    <h1>Choose an Action</h1>
+    <form action="/results" method="get">
+        <button type="submit">Go to Results</button>
+    </form>
+    <form action="/other" method="get">
+        <button type="submit">Go to Other</button>
     </form>
 </body>
 </html>
