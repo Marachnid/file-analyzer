@@ -1,9 +1,0 @@
-Application Name: The Assimilator
-Author: mcherry2
-Author email: mcherry2@madisoncollege.edu
-File Path: /tmp/tempFiles18295167387421912450/testFile.txt
-Date of analysis: Mon Feb 17 05:22:34 UTC 2025
-Last Modified: Mon Feb 17 05:22:34 UTC 2025
-File Size (bytes): 78
-File URI: file:/tmp/tempFiles18295167387421912450/testFile.txt
-Total Tokens: 10
